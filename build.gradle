@@ -36,6 +36,7 @@ subprojects {
     apply plugin: 'jacoco'
     apply plugin: 'org.javamodularity.moduleplugin'
     apply plugin: 'io.freefair.lombok'
+    apply plugin: 'checkstyle'
 
     sourceCompatibility = 11
     targetCompatibility = 11
@@ -56,6 +57,8 @@ subprojects {
     }
 
     dependencies {
+        checkstyle 'com.puppycrawl.tools:checkstyle:8.30'
+
         testImplementation enforcedPlatform('org.junit:junit-bom:5.5.2')
         testImplementation 'org.junit.jupiter:junit-jupiter-api'
         testImplementation 'org.junit.jupiter:junit-jupiter-params'
