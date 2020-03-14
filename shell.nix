@@ -1,6 +1,10 @@
-with import <nixos-unstable> {};
+with import <nixpkgs> {};
+let
+  unstable = import <nixos-unstable> {config = config.nixpkgs.config;};
+  nur = import <nur> {inherit pkgs; };
+in with pkgs;
 mkShell {
   buildInputs = [
-    micronaut
+    unstable.micronaut
   ];
 }

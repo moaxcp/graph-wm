@@ -1,0 +1,2 @@
+group = 'com.github.moaxcp.graphwm'
+description = 'a tiling window manager which uses a graph to make tiling easy.'
