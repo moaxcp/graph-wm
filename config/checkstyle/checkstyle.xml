@@ -14,6 +14,10 @@
     To suppress certain violations please review suppression filters.
 
     Authors: Max Vetrenko, Ruslan Diachenko, Roman Ivanov.
+
+    Modified to allow star imports: certain libraries are designed to reduce imports by putting everything in one
+    package or by putting all static methods in one class. This rule subverts that design. Example: graphs, assertj,
+    lombok.
  -->
 
 <module name = "Checker">
@@ -60,7 +64,9 @@
             <property name="allowByTailComment" value="true"/>
             <property name="allowNonPrintableEscapes" value="true"/>
         </module>
-        <module name="AvoidStarImport"/>
+        <module name="AvoidStarImport">
+            <property name="excludes" value="com.github.moaxcp.graphs.*"/>
+        </module>
         <module name="OneTopLevelClass"/>
         <module name="NoLineWrap">
             <property name="tokens" value="PACKAGE_DEF, IMPORT, STATIC_IMPORT"/>
