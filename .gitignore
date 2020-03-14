@@ -15,3 +15,5 @@ gradle-app.setting
 
 .swp
 .idea
+/core/lombok.config
+build
