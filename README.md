@@ -20,20 +20,20 @@ The screen represents the hardware display. It has dementions based on what is
 set by the operating system. A screen can display exactly one workspace. A
 screen can switch which workspace it displays.
 
-# Workspace
+### Workspace
 
 A workspace is a grouping of Tiles. A workspace has the same dementions as the
 screen containing it. A workspace can only be displayed by one screen. There 
 can be no gaps between tiles in a workspace. The screen can be switched 
 between workspaces.
 
-# Tile
+### Tile
 
 A tile is a container for clients. Only one client can be displayed in a tile.
 A tile must always be adjacent to other tile edges or the edges of the 
 workspace which contains the tile.
 
-# Client
+### Client
 
 A client is an application managed by the windows manager. It is a client to
 X11. A client must fill the space of the tile completely.
