@@ -5,16 +5,14 @@ import lombok.*;
 @Value
 @With
 @AllArgsConstructor
-public class Screen {
-  @NonNull String id;
+public class Workspace {
+  String id;
   int width;
   int height;
-  Workspace workspace;
 
-  public Screen(@NonNull String id) {
+  public Workspace(String id) {
     this.id = id;
     width = 0;
     height = 0;
-    workspace = null;
   }
 }

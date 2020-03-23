@@ -1,4 +1,4 @@
-package com.github.moaxcp.graphwm;
+package com.github.moaxcp.graphwm.graphservice;
 
 import org.junit.jupiter.api.*;
 

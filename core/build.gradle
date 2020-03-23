@@ -1,6 +1,12 @@
+plugins {
+    id 'java-library'
+}
+
 dependencies {
+    api 'io.vavr:vavr:1.0.0-alpha-3'
     implementation 'com.github.moaxcp.graphs:graphs-core:0.10.0'
     testImplementation 'com.github.moaxcp.graphs:graphs-truth:0.10.0'
+    testImplementation 'org.assertj:assertj-vavr:0.2.0'
 }
 
 compileTestJava {
