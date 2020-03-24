@@ -46,7 +46,7 @@
 
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
-        <property name="max" value="100"/>
+        <property name="max" value="120"/>
         <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
     </module>
 
@@ -65,7 +65,8 @@
             <property name="allowNonPrintableEscapes" value="true"/>
         </module>
         <module name="AvoidStarImport">
-            <property name="excludes" value="com.github.moaxcp.graphs.*"/>
+            <property name="allowClassImports" value="true"/>
+            <property name="allowStaticMemberImports" value="true"/>
         </module>
         <module name="OneTopLevelClass"/>
         <module name="NoLineWrap">
@@ -304,7 +305,7 @@
             <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF"/>
         </module>
         <module name="MissingJavadocMethod">
-            <property name="scope" value="public"/>
+            <property name="scope" value="protected"/>
             <property name="minLineCount" value="2"/>
             <property name="allowedAnnotations" value="Override, Test"/>
             <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF"/>

@@ -6,11 +6,11 @@ import lombok.*;
 @With
 @AllArgsConstructor
 public class Workspace {
-  String id;
+  @NonNull String id;
   int width;
   int height;
 
-  public Workspace(String id) {
+  public Workspace(@NonNull String id) {
     this.id = id;
     width = 0;
     height = 0;

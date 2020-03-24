@@ -1,5 +1,6 @@
 package com.github.moaxcp.graphwm;
 
+import io.vavr.control.*;
 import lombok.*;
 
 @Value
@@ -16,5 +17,9 @@ public class Screen {
     width = 0;
     height = 0;
     workspace = null;
+  }
+
+  public Option<Workspace> getWorkspace() {
+    return Option.of(workspace);
   }
 }

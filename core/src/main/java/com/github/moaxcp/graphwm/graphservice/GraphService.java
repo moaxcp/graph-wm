@@ -13,6 +13,7 @@ public class GraphService {
 
   public class Screen {
     private String id;
+
     private Screen(String id) {
       this.id = id;
     }
