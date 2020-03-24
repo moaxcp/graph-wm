@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.javamodularity:moduleplugin:1.6.0'
-        classpath 'io.freefair.gradle:lombok-plugin:4.1.6'
+        classpath 'io.freefair.gradle:lombok-plugin:5.0.0-rc6'
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.9.2'
     }
 }
@@ -38,8 +38,8 @@ subprojects {
     apply plugin: 'io.freefair.lombok'
     apply plugin: 'checkstyle'
 
-    sourceCompatibility = 11
-    targetCompatibility = 11
+    sourceCompatibility = 13
+    targetCompatibility = 13
 
     jacoco {
         toolVersion = '0.8.5'
@@ -92,5 +92,6 @@ subprojects {
 
     lombok {
         config['lombok.toString.callSuper'] = "call"
+        version = "1.18.12"
     }
 }

@@ -12,10 +12,10 @@ public class Screen {
   int height;
   Workspace workspace;
 
-  public Screen(@NonNull String id) {
+  public Screen(@NonNull String id, int width, int height) {
     this.id = id;
-    width = 0;
-    height = 0;
+    this.width = width;
+    this.height = height;
     workspace = null;
   }
 

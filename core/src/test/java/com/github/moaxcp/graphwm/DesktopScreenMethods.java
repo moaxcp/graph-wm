@@ -1,53 +1,32 @@
 package com.github.moaxcp.graphwm;
 
 import io.vavr.*;
-import io.vavr.collection.*;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DesktopScreenMethods {
-  @Test
-  void withScreens_null() {
-    var desktop = new Desktop();
-    var exception = assertThrows(NullPointerException.class, () -> desktop.withScreens(null));
-    assertThat(exception).hasMessage("screens is marked non-null but is null");
-  }
 
   @Test
-  void withScreens() {
+  void screen_null() {
     var desktop = new Desktop();
-    desktop = desktop.withScreens(HashMap.of("id", new Screen("id")));
-    assertThat(desktop.getScreens()).containsExactly(new Tuple2<>("id", new Screen("id")));
-  }
-
-  @Test
-  void withScreen_null() {
-    var desktop = new Desktop();
-    var exception = assertThrows(NullPointerException.class, () -> desktop.withScreen((Screen) null));
-    assertThat(exception).hasMessage("screen is marked non-null but is null");
-  }
-
-  @Test
-  void withScreen() {
-    var desktop = new Desktop();
-    desktop = desktop.withScreen(new Screen("id"));
-    assertThat(desktop.getScreens()).containsExactly(new Tuple2<>("id", new Screen("id")));
-  }
-
-  @Test
-  void withScreen_nullId() {
-    var desktop = new Desktop();
-    var exception = assertThrows(NullPointerException.class, () -> desktop.withScreen((String) null));
+    var exception = assertThrows(NullPointerException.class, () -> desktop.screen(null, 0, 0));
     assertThat(exception).hasMessage("id is marked non-null but is null");
   }
 
   @Test
-  void withScreen_id() {
+  void screen() {
     var desktop = new Desktop();
-    desktop = desktop.withScreen("id");
-    assertThat(desktop.getScreens()).containsExactly(new Tuple2<>("id", new Screen("id")));
+    desktop = desktop.screen("id", 100, 120);
+    assertThat(desktop.getScreens()).containsExactly(new Tuple2<>("id", new Screen("id", 100, 120)));
+  }
+
+  @Test
+  void screen_modifyWidthHeight() {
+    var desktop = new Desktop().screen("id", 100, 120);
+    desktop = desktop.screen("id", 400, 500);
+    assertThat(desktop.getScreens()).containsExactly(new Tuple2<>("id", new Screen("id", 400, 500)));
   }
 
   @Test
@@ -57,9 +36,41 @@ public class DesktopScreenMethods {
   }
 
   @Test
+  void removeScreen_empty() {
+    var desktop = new Desktop().removeScreen("id");
+    assertThat(desktop.getScreens()).isEmpty();
+  }
+
+  @Test
   void removeScreen() {
-    var desktop = new Desktop().withScreen(new Screen("id"));
+    var desktop = new Desktop().screen("id", 100, 120);
     desktop = desktop.removeScreen("id");
     assertThat(desktop.getScreens()).isEmpty();
+  }
+
+  @Test
+  void assignWorkspace_nullWorkspaceId() {
+    var desktop = new Desktop();
+    var exception = assertThrows(NullPointerException.class, () -> desktop.assignWorkspace(null, "id"));
+    assertThat(exception).hasMessage("workspaceId is marked non-null but is null");
+  }
+
+  @Test
+  void assignWorkspace_nullScreenId() {
+    var desktop = new Desktop();
+    var exception = assertThrows(NullPointerException.class, () -> desktop.assignWorkspace("id", null));
+    assertThat(exception).hasMessage("screenId is marked non-null but is null");
+  }
+
+  @Test
+  void assignWorkspace_workspaceNotFound() {
+    var desktop = new Desktop().screen("screen", 100, 120);
+    var exception = assertThrows(IllegalArgumentException.class, () -> desktop.assignWorkspace("workspace", "screen"));
+    assertThat(exception).hasMessage("Workspace \"workspace\" not found.");
+  }
+
+  @Test
+  void assignWorkspace_screenNotFound() {
+    assert false;
   }
 }

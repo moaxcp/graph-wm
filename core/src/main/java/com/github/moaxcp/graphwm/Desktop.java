@@ -3,9 +3,9 @@ package com.github.moaxcp.graphwm;
 import io.vavr.collection.*;
 import lombok.*;
 
-@With
+@With(AccessLevel.PRIVATE)
 @Value
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Desktop {
   @NonNull Map<String, Screen> screens;
   @NonNull Map<String, Workspace> workspaces;
@@ -15,15 +15,26 @@ public class Desktop {
     workspaces = HashMap.empty();
   }
 
-  public Desktop withScreen(@NonNull String id) {
-    return withScreen(new Screen(id));
-  }
-
-  public Desktop withScreen(@NonNull Screen screen) {
-    return withScreens(screens.put(screen.getId(), screen));
+  public Desktop screen(@NonNull String id, int width, int height) {
+    return withScreens(screens.put(id, new Screen(id, width, height)));
   }
 
   public Desktop removeScreen(@NonNull String id) {
     return withScreens(screens.remove(id));
+  }
+
+  public Desktop workspace(@NonNull String id) {
+    return withWorkspaces(workspaces.put(id, new Workspace(id)));
+  }
+
+  public Desktop removeWorkspace(@NonNull String id) {
+    return withWorkspaces(workspaces.remove(id));
+  }
+
+  public Desktop assignWorkspace(@NonNull String workspaceId, @NonNull String screenId) {
+    if(!workspaces.containsKey(workspaceId)) {
+      throw new IllegalArgumentException("Workspace \"%s\" not found.".formatted(workspaceId));
+    }
+    return null;
   }
 }

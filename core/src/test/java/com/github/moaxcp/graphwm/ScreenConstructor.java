@@ -9,13 +9,13 @@ import static org.assertj.vavr.api.VavrAssertions.*;
 public class ScreenConstructor {
   @Test
   void customConstructor_nullId() {
-    var exception = assertThrows(NullPointerException.class, () -> new Screen(null));
+    var exception = assertThrows(NullPointerException.class, () -> new Screen(null, 0, 0));
     assertThat(exception).hasMessage("id is marked non-null but is null");
   }
 
   @Test
   void customConstructor() {
-    var screen = new Screen("id");
+    var screen = new Screen("id", 0, 0);
     assertThat(screen).satisfies(s -> {
       assertThat(s.getId()).isEqualTo("id");
       assertThat(s.getWidth()).isEqualTo(0);
