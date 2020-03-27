@@ -35,6 +35,11 @@ public class Desktop {
     if(!workspaces.containsKey(workspaceId)) {
       throw new IllegalArgumentException("Workspace \"%s\" not found.".formatted(workspaceId));
     }
-    return null;
+    if(!screens.containsKey(screenId)) {
+      throw new IllegalArgumentException("Screen \"%s\" not found.".formatted(screenId));
+    }
+    Screen screen = screens.get(screenId).get()
+      .withWorkspace(workspaces.get(workspaceId).get());
+    return withScreens(screens.put(screenId, screen));
   }
 }
