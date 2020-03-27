@@ -66,22 +66,11 @@ subprojects {
         //https://github.com/openjdk/skara/pull/66
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-        testImplementation 'com.google.truth:truth:1.0.1'
-        testImplementation 'com.google.truth.extensions:truth-java8-extension:1.0.1'
+        testImplementation 'org.assertj:assertj-core:3.14.0'
     }
-
-    patchModules.config = [
-        "truth=truth-java8-extension-1.0.1.jar"
-    ]
 
     tasks.withType(JavaCompile).each {
         it.options.compilerArgs.add('--enable-preview')
-    }
-
-    compileTestJava {
-        moduleOptions {
-            addModules = ['truth']
-        }
     }
 
     test {
@@ -92,8 +81,6 @@ subprojects {
         reports {
             html.enabled = true
         }
-
-        systemProperty "com.google.common.truth.disable_stack_trace_cleaning", "true"
     }
 
     lombok {

@@ -32,14 +32,14 @@ public class Desktop {
   }
 
   public Desktop assignWorkspace(@NonNull String workspaceId, @NonNull String screenId) {
-    if(!workspaces.containsKey(workspaceId)) {
+    if (!workspaces.containsKey(workspaceId)) {
       throw new IllegalArgumentException("Workspace \"%s\" not found.".formatted(workspaceId));
     }
-    if(!screens.containsKey(screenId)) {
+    if (!screens.containsKey(screenId)) {
       throw new IllegalArgumentException("Screen \"%s\" not found.".formatted(screenId));
     }
     Screen screen = screens.get(screenId).get()
-      .withWorkspace(workspaces.get(workspaceId).get());
+        .withWorkspace(workspaces.get(workspaceId).get());
     return withScreens(screens.put(screenId, screen));
   }
 }
