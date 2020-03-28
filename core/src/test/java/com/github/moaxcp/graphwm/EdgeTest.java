@@ -10,20 +10,26 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EdgeTest {
   private Point point = point(0, 0);
   @Test
+  void edge_nullPoint() {
+    var exception = assertThrows(NullPointerException.class, () -> edge(1, null, 0, 0));
+    assertThat(exception).hasMessage("point is marked non-null but is null");
+  }
+
+  @Test
   void edge_negativeWidth() {
-    var exception = assertThrows(IllegalArgumentException.class, () -> edge(point, -1, -1));
+    var exception = assertThrows(IllegalArgumentException.class, () -> edge(1, point, -1, -1));
     assertThat(exception).hasMessage("width must be positive.");
   }
 
   @Test
   void edge_negativeHeight() {
-    var exception = assertThrows(IllegalArgumentException.class, () -> edge(point, 100, -1));
+    var exception = assertThrows(IllegalArgumentException.class, () -> edge(1, point, 100, -1));
     assertThat(exception).hasMessage("height must be positive.");
   }
 
   @Test
   void createEdge() {
-    var edge = edge(point, 1, 1000);
+    var edge = edge(1, point, 1, 1000);
     assertThat(edge.getPoint()).isEqualTo(point);
     assertThat(edge.getWidth()).isEqualTo(1);
     assertThat(edge.getHeight()).isEqualTo(1000);

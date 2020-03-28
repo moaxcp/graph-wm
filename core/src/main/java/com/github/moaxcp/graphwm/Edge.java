@@ -6,15 +6,17 @@ import lombok.*;
 @With
 public class Edge implements Window {
 
-  public static Edge edge(Point point, int width, int height) {
-    return new Edge(point, width, height);
+  public static Edge edge(int id, Point point, int width, int height) {
+    return new Edge(id, point, width, height);
   }
 
+  int id;
   Point point;
   int width;
   int height;
 
-  private Edge(Point point, int width, int height) {
+  private Edge(int id, @NonNull Point point, int width, int height) {
+    this.id = id;
     if (width < 0) {
       throw new IllegalArgumentException("width must be positive.");
     }

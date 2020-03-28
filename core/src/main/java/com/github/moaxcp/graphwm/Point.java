@@ -2,6 +2,9 @@ package com.github.moaxcp.graphwm;
 
 import lombok.*;
 
+/**
+ * A point on the screen. The coordinates x and y must be positive.
+ */
 @Value
 @With
 public class Point {
