@@ -23,11 +23,12 @@ public class Desktop {
     return withScreens(screens.remove(id));
   }
 
-  public Desktop workspace(@NonNull String id) {
-    return withWorkspaces(workspaces.put(id, new Workspace(id)));
+  public Desktop workspace(@NonNull String id, int width, int height) {
+    return withWorkspaces(workspaces.put(id, new Workspace(id, width, height)));
   }
 
   public Desktop removeWorkspace(@NonNull String id) {
+    //todo cannot remove workspace if it is assigned to a screen?
     return withWorkspaces(workspaces.remove(id));
   }
 
@@ -38,6 +39,7 @@ public class Desktop {
     if (!screens.containsKey(screenId)) {
       throw new IllegalArgumentException("Screen \"%s\" not found.".formatted(screenId));
     }
+    //todo implement in screen and then call from desktop
     Screen screen = screens.get(screenId).get()
         .withWorkspace(workspaces.get(workspaceId).get());
     return withScreens(screens.put(screenId, screen));

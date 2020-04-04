@@ -9,7 +9,7 @@ import lombok.*;
 @With
 public class Point {
 
-  public static Point point(int x, int y) {
+  static Point point(int x, int y) {
     return new Point(x, y);
   }
 
@@ -25,5 +25,9 @@ public class Point {
     }
     this.x = x;
     this.y = y;
+  }
+
+  public Point withXRelative(int add) {
+    return withX(x + add);
   }
 }

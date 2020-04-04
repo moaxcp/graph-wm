@@ -71,14 +71,14 @@ public class DesktopScreenMethods {
 
   @Test
   void assignWorkspace_screenNotFound() {
-    var desktop = new Desktop().workspace("workspace");
+    var desktop = new Desktop().workspace("workspace", 0, 0);
     var exception = assertThrows(IllegalArgumentException.class, () -> desktop.assignWorkspace("workspace", "screen"));
     assertThat(exception).hasMessage("Screen \"screen\" not found.");
   }
 
   @Test
   void assignWorkspace() {
-    var desktop = new Desktop().workspace("workspace").screen("screen", 100, 120);
+    var desktop = new Desktop().workspace("workspace", 0, 0).screen("screen", 100, 120);
     desktop = desktop.assignWorkspace("workspace", "screen");
     var workspace = desktop.getWorkspaces().get("workspace").get();
     assertThat(desktop.getScreens().get("screen").get().getWorkspace().get()).isSameAs(workspace);

@@ -12,7 +12,7 @@ public class EdgeTest {
   @Test
   void edge_nullPoint() {
     var exception = assertThrows(NullPointerException.class, () -> edge(1, null, 0, 0));
-    assertThat(exception).hasMessage("point is marked non-null but is null");
+    assertThat(exception).hasMessage("northWestCorner is marked non-null but is null");
   }
 
   @Test
@@ -30,7 +30,7 @@ public class EdgeTest {
   @Test
   void createEdge() {
     var edge = edge(1, point, 1, 1000);
-    assertThat(edge.getPoint()).isEqualTo(point);
+    assertThat(edge.getNorthWestCorner()).isEqualTo(point);
     assertThat(edge.getWidth()).isEqualTo(1);
     assertThat(edge.getHeight()).isEqualTo(1000);
   }

@@ -13,7 +13,7 @@ public class TileTest {
   @Test
   void tile_nullPoint() {
     var exception = assertThrows(NullPointerException.class, () -> tile(1, null, 0, 0));
-    assertThat(exception).hasMessage("point is marked non-null but is null");
+    assertThat(exception).hasMessage("northWestCorner is marked non-null but is null");
   }
 
   @Test
@@ -31,7 +31,7 @@ public class TileTest {
   @Test
   void createTile() {
     var tile = tile(1, point, 1, 1000);
-    assertThat(tile.getPoint()).isEqualTo(point);
+    assertThat(tile.getNorthWestCorner()).isEqualTo(point);
     assertThat(tile.getWidth()).isEqualTo(1);
     assertThat(tile.getHeight()).isEqualTo(1000);
   }

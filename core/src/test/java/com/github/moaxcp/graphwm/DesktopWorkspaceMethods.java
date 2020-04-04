@@ -11,15 +11,15 @@ public class DesktopWorkspaceMethods {
   @Test
   void workspace_null() {
     var desktop = new Desktop();
-    var exception = assertThrows(NullPointerException.class, () -> desktop.workspace(null));
+    var exception = assertThrows(NullPointerException.class, () -> desktop.workspace(null, 0, 0));
     assertThat(exception).hasMessage("id is marked non-null but is null");
   }
 
   @Test
   void workspace() {
-    var desktop = new Desktop().workspace("id");
+    var desktop = new Desktop().workspace("id", 0, 0);
     assertThat(desktop).satisfies(d -> {
-      assertThat(d.getWorkspaces()).containsExactly(new Tuple2<>("id", new Workspace("id")));
+      assertThat(d.getWorkspaces()).containsExactly(new Tuple2<>("id", new Workspace("id", 0, 0)));
     });
   }
 
@@ -38,7 +38,7 @@ public class DesktopWorkspaceMethods {
 
   @Test
   void removeWorkspace() {
-    var desktop = new Desktop().workspace("id");
+    var desktop = new Desktop().workspace("id", 0, 0);
     desktop = desktop.removeWorkspace("id");
     assertThat(desktop.getWorkspaces()).isEmpty();
   }

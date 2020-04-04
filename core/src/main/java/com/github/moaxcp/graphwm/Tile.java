@@ -10,16 +10,16 @@ import lombok.*;
 @With
 public class Tile implements Window {
 
-  public static Tile tile(int id, Point point, int width, int height) {
+  static Tile tile(int id, Point point, int width, int height) {
     return new Tile(id, point, width, height);
   }
 
   int id;
-  @NonNull Point point;
+  @NonNull Point northWestCorner;
   int width;
   int height;
 
-  private Tile(int id, @NonNull Point point, int width, int height) {
+  private Tile(int id, @NonNull Point northWestCorner, int width, int height) {
     this.id = id;
     if (width < 0) {
       throw new IllegalArgumentException("width must be positive.");
@@ -27,23 +27,8 @@ public class Tile implements Window {
     if (height < 0) {
       throw new IllegalArgumentException("height must be positive.");
     }
-    this.point = point;
+    this.northWestCorner = northWestCorner;
     this.width = width;
     this.height = height;
-  }
-
-  @Override
-  public Point getPoint() {
-    return point;
-  }
-
-  @Override
-  public int getWidth() {
-    return width;
-  }
-
-  @Override
-  public int getHeight() {
-    return height;
   }
 }

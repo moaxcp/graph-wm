@@ -5,14 +5,14 @@ import lombok.*;
 
 @Value
 @With
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Screen {
   @NonNull String id;
   int width;
   int height;
   Workspace workspace;
 
-  public Screen(@NonNull String id, int width, int height) {
+  Screen(@NonNull String id, int width, int height) {
     this.id = id;
     this.width = width;
     this.height = height;
