@@ -33,21 +33,20 @@ public interface Window<SELF extends Window<SELF>> {
   }
 
   default SELF resizeNorth(int north) {
-    var northWest = getNorthWestCorner();
-    var nextY = northWest.getY() + north;
-    return this.withHeight(getHeight() - north)
-        .withNorthWestCorner(northWest.withY(nextY));
+    return withHeight(getHeight() - north)
+        .withNorthWestCorner(getNorthWestCorner().withYRelative(north));
   }
 
   default SELF resizeSouth(int south) {
-    return this.withHeight(getHeight() + south);
+    return withHeight(getHeight() + south);
   }
 
   default SELF resizeWest(int west) {
-    return (SELF) this;
+    return withWidth(getWidth() - west)
+        .withNorthWestCorner(getNorthWestCorner().withXRelative(west));
   }
 
   default SELF resizeEast(int east) {
-    return (SELF) this;
+    return withWidth(getWidth() + east);
   }
 }

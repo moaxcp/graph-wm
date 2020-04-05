@@ -30,4 +30,8 @@ public class Point {
   public Point withXRelative(int add) {
     return withX(x + add);
   }
+
+  public Point withYRelative(int add) {
+    return withY(y + add);
+  }
 }
