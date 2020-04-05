@@ -30,9 +30,10 @@ public class TileTest {
 
   @Test
   void createTile() {
-    var tile = tile(1, point, 1, 1000);
+    var tile = tile(1, point, 100, 1000);
     assertThat(tile.getNorthWestCorner()).isEqualTo(point);
-    assertThat(tile.getWidth()).isEqualTo(1);
+    assertThat(tile.getNorthEastCorner()).isEqualTo(point.withX(point.getX() + 100 - 1));
+    assertThat(tile.getWidth()).isEqualTo(100);
     assertThat(tile.getHeight()).isEqualTo(1000);
   }
 }

@@ -7,7 +7,7 @@ public interface Window {
 
   default Point getNorthEastCorner() {
     var northWest = getNorthWestCorner();
-    return point(northWest.getX() + getWidth(), northWest.getY());
+    return point(northWest.getX() + getWidth() - 1, northWest.getY());
   }
 
   int getWidth();

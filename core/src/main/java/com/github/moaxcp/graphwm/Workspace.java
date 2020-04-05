@@ -30,20 +30,27 @@ public class Workspace {
     edges = HashMap.empty();
   }
 
+  /**
+   * Splits a tile vertically keeping the original tile on the west side.
+   * @param tileId
+   * @return
+   */
   Workspace splitTileWest(int tileId) {
     var tile = tiles.get(tileId).getOrElseThrow(() -> new IllegalArgumentException("tileId \"{}\" not found.".formatted(tileId)));
     int edgeX = (tile.getWidth() - 1 - EDGE_WIDTH / 2) / 2;
-    var edge = edge(getNextId(edges.keySet()), tile.getNorthEastCorner().withX(edgeX), 1, tile.getHeight());
+    var edge = edge(getNextId(edges.keySet()), tile.getNorthEastCorner().withX(edgeX), EDGE_WIDTH, tile.getHeight());
     var nextEdges = edges.put(edge.getId(), edge);
 
     var west = tile.withWidth(edge.getNorthWestCorner().getX() - tile.getNorthWestCorner().getX());
     var nextTiles = tiles.put(west.getId(), west);
 
     var northWest = edge.getNorthEastCorner().withXRelative(1);
-    var east = tile(getNextId(nextTiles.keySet()), northWest, tile.getNorthEastCorner().getX() - edge.getNorthEastCorner().getX() - 1, height);
+    var east = tile(getNextId(nextTiles.keySet()), northWest, tile.getNorthEastCorner().getX() - edge.getNorthEastCorner().getX(), height);
     nextTiles = nextTiles.put(east.getId(), east);
 
-    return withEdges(nextEdges).withTiles(nextTiles);
+    var nextGraph = graph.edge(west.getId(), east.getId(), edge.getId());
+
+    return withEdges(nextEdges).withTiles(nextTiles).withGraph(nextGraph);
   }
 
   private int getNextId(Set<Integer> keys) {
@@ -51,5 +58,17 @@ public class Workspace {
         .max()
         .map(max -> max + 1)
         .getOrElse(0);
+  }
+
+  public Workspace splitTileNorth(int tileId) {
+    var tile = tiles.get(tileId).getOrElseThrow(() -> new IllegalArgumentException("tileId \"{}\" not found.".formatted(tileId)));
+    int edgeY = (tile.getHeight() - 1 - EDGE_WIDTH / 2) / 2;
+    var edge = edge(getNextId(edges.keySet()), tile.getNorthEastCorner().withY(edgeY), tile.getWidth(), EDGE_WIDTH);
+    var nextEdges = edges.put(edge.getId(), edge);
+
+    var nextTiles = tiles;
+    var nextGraph = graph;
+
+    return withEdges(nextEdges).withTiles(nextTiles).withGraph(nextGraph);
   }
 }
