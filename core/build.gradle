@@ -10,9 +10,11 @@ dependencies {
 
 compileTestJava {
     moduleOptions {
-        addReads = ['com.github.moaxcp.graphwm.core' : 'org.assertj.core',
-                    'assertj.vavr':'org.assertj.core']
-        addModules = ['org.assertj.core']
+        addReads = [
+            'com.github.moaxcp.graphwm.core' : 'org.assertj.core,org.junit.jupiter.params',
+            'assertj.vavr':'org.assertj.core'
+        ]
+        addModules = ['org.assertj.core', 'org.junit.jupiter.params']
     }
 }
 

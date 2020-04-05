@@ -8,7 +8,7 @@ import lombok.*;
  */
 @Value
 @With
-public class Tile implements Window {
+public class Tile implements Window<Tile> {
 
   static Tile tile(int id, Point point, int width, int height) {
     return new Tile(id, point, width, height);

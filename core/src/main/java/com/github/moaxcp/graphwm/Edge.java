@@ -4,7 +4,7 @@ import lombok.*;
 
 @Value
 @With
-public class Edge implements Window {
+public class Edge implements Window<Edge> {
 
   static Edge edge(int id, Point point, int width, int height) {
     return new Edge(id, point, width, height);
