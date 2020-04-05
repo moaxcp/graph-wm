@@ -1,7 +1,5 @@
 package com.github.moaxcp.graphwm;
 
-import static com.github.moaxcp.graphwm.Point.*;
-
 public interface Window<SELF extends Window<SELF>> {
   int getId();
 
@@ -18,18 +16,18 @@ public interface Window<SELF extends Window<SELF>> {
   SELF withHeight(int height);
 
   default Point getNorthEastCorner() {
-    var northWest = getNorthWestCorner();
-    return point(northWest.getX() + getWidth() - 1, northWest.getY());
+    return getNorthWestCorner()
+        .withXRelative(getWidth() - 1);
   }
 
   default Point getSouthWestCorner() {
-    var northWest = getNorthWestCorner();
-    return point(northWest.getX(), northWest.getY() + getHeight() - 1);
+    return getNorthWestCorner()
+        .withYRelative(getHeight() - 1);
   }
 
   default Point getSouthEastCorner() {
-    var northEast = getNorthEastCorner();
-    return point(northEast.getX(), northEast.getY() + getHeight() - 1);
+    return getNorthEastCorner()
+        .withYRelative(getHeight() - 1);
   }
 
   default SELF resizeNorth(int north) {
