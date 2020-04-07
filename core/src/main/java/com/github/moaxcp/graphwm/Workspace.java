@@ -36,16 +36,19 @@ public class Workspace {
    * @return
    */
   Workspace splitTileWest(int tileId) {
+    var nextId = getNextId();
+
     var tile = tiles.get(tileId).getOrElseThrow(() -> new IllegalArgumentException("tileId \"{}\" not found.".formatted(tileId)));
-    int edgeX = (tile.getWidth() - 1 - EDGE_WIDTH / 2) / 2;
-    var edge = edge(getNextId(edges.keySet()), tile.getNorthEastCorner().withX(edgeX), EDGE_WIDTH, tile.getHeight());
+
+    var edgePoint = tile.getNorthWestCorner().withXRelative(tile.getWidth() / 2 - EDGE_WIDTH / 2);
+    var edge = edge(nextId++, edgePoint, EDGE_WIDTH, tile.getHeight());
     var nextEdges = edges.put(edge.getId(), edge);
 
     var west = tile.withWidth(edge.getNorthWestCorner().getX() - tile.getNorthWestCorner().getX());
     var nextTiles = tiles.put(west.getId(), west);
 
     var northWest = edge.getNorthEastCorner().withXRelative(1);
-    var east = tile(getNextId(nextTiles.keySet()), northWest, tile.getNorthEastCorner().getX() - edge.getNorthEastCorner().getX(), height);
+    var east = tile(nextId++, northWest, tile.getNorthEastCorner().getX() - edge.getNorthEastCorner().getX(), height);
     nextTiles = nextTiles.put(east.getId(), east);
 
     var nextGraph = graph.edge(west.getId(), east.getId(), edge.getId());
@@ -53,22 +56,31 @@ public class Workspace {
     return withEdges(nextEdges).withTiles(nextTiles).withGraph(nextGraph);
   }
 
-  private int getNextId(Set<Integer> keys) {
-    return keys.toStream()
+  private int getNextId() {
+    return Stream.of(tiles.keySet(), edges.keySet())
+        .flatMap(Set::toStream)
         .max()
         .map(max -> max + 1)
         .getOrElse(0);
   }
 
   public Workspace splitTileNorth(int tileId) {
+    var nextId = getNextId();
+
     var tile = tiles.get(tileId).getOrElseThrow(() -> new IllegalArgumentException("tileId \"{}\" not found.".formatted(tileId)));
-    int edgeY = (tile.getHeight() - 1 - EDGE_WIDTH / 2) / 2;
-    var edge = edge(getNextId(edges.keySet()), tile.getNorthEastCorner().withY(edgeY), tile.getWidth(), EDGE_WIDTH);
+
+    var edgePoint = tile.getNorthWestCorner().withYRelative(tile.getHeight() / 2 - EDGE_WIDTH / 2);
+    var edge = edge(nextId++, edgePoint, tile.getWidth(), EDGE_WIDTH);
     var nextEdges = edges.put(edge.getId(), edge);
 
-    var nextTiles = tiles;
-    var nextGraph = graph;
+    var north = tile.withHeight(edge.getNorthWestCorner().getY() - tile.getNorthWestCorner().getY());
+    var nextTiles = tiles.put(north.getId(), north);
 
+    var northWest = edge.getSouthWestCorner().withYRelative(1);
+    var south = tile(nextId++, northWest, tile.getWidth(), tile.getSouthWestCorner().getY() - edge.getSouthWestCorner().getY());
+    nextTiles = nextTiles.put(south.getId(), south);
+
+    var nextGraph = graph.edge(north.getId(), south.getId(), edge.getId());
     return withEdges(nextEdges).withTiles(nextTiles).withGraph(nextGraph);
   }
 }
