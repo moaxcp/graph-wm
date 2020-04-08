@@ -56,4 +56,16 @@ public class ValueGraph<K, V> {
   public boolean isEmpty() {
     return vertices.isEmpty();
   }
+
+  public Set<Edge<K>> edgesWithValue(@NonNull K value) {
+    return edges.toStream()
+        .filter(t -> t._2().equals(value))
+        .map(t -> t._1())
+        .foldLeft(HashSet.of(), HashSet::add);
+  }
+
+  public Set<K> verticesWithEdgeValue(@NonNull K value) {
+    return edgesWithValue(value).toStream()
+      .foldLeft(HashSet.of(), (set, edge) -> set.add(edge.source).add(edge.target));
+  }
 }

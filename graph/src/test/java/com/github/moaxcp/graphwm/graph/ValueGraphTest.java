@@ -2,6 +2,7 @@ package com.github.moaxcp.graphwm.graph;
 
 import com.github.moaxcp.graphwm.graph.ValueGraph.*;
 import io.vavr.*;
+import io.vavr.collection.*;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -67,5 +68,42 @@ public class ValueGraphTest {
         .edge(2, 1, 3);
     assertThat(graph.getVertices()).containsExactly(1, 2);
     assertThat(graph.getEdges()).containsExactly(Tuple.of(new Edge<>(1, 2), 3));
+  }
+
+  @Test
+  void edgesWithValues_null() {
+    var exception = assertThrows(NullPointerException.class, () -> new ValueGraph<>().edgesWithValue(null));
+    assertThat(exception).hasMessage("value is marked non-null but is null");
+  }
+
+  @Test
+  void edgesWithValues() {
+    var graph = new ValueGraph<>()
+        .edge(1, 2, 'A')
+        .edge(3, 4, 'A')
+        .edge(5, 6, 'A')
+        .edge(10, 11, 'B')
+        .edge(20, 21, 'B');
+    assertThat(graph.edgesWithValue('A')).isEqualTo(HashSet.of(new Edge(1, 2),
+        new Edge(3, 4),
+        new Edge(5, 6)));
+  }
+
+  @Test
+  void verticesWithEdgeValue_null() {
+    var graph = new ValueGraph<>();
+    var exception = assertThrows(NullPointerException.class, () -> graph.verticesWithEdgeValue(null));
+    assertThat(exception).hasMessage("value is marked non-null but is null");
+  }
+
+  @Test
+  void verticesWithEdgeValue() {
+    var graph = new ValueGraph<>()
+        .edge(1, 2, 'A')
+        .edge(3, 4, 'A')
+        .edge(5, 6, 'A')
+        .edge(10, 11, 'B')
+        .edge(20, 21, 'B');
+    assertThat(graph.verticesWithEdgeValue('A')).containsExactly(1, 2, 3, 4, 5, 6);
   }
 }

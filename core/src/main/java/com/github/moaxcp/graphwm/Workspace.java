@@ -83,4 +83,13 @@ public class Workspace {
     var nextGraph = graph.edge(north.getId(), south.getId(), edge.getId());
     return withEdges(nextEdges).withTiles(nextTiles).withGraph(nextGraph);
   }
+
+  public Workspace resizeNorth(int edgeId, int resize) {
+
+    return this;
+  }
+
+  public Set<Integer> getTilesWithEdge(int edgeId) {
+    return graph.verticesWithEdgeValue(edgeId);
+  }
 }
