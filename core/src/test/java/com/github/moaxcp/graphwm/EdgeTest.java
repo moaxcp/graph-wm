@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class EdgeTest {
   private Point point = point(0, 0);
+
   @Test
   void edge_nullPoint() {
     var exception = assertThrows(NullPointerException.class, () -> edge(1, null, 0, 0));

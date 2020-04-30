@@ -5,7 +5,7 @@ public interface Window<SELF extends Window<SELF>> {
 
   Point getNorthWestCorner();
 
-  public SELF withNorthWestCorner(Point northWestCorner);
+  SELF withNorthWestCorner(Point northWestCorner);
 
   int getWidth();
 

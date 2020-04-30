@@ -1,9 +1,8 @@
 package com.github.moaxcp.graphwm;
 
+import java.util.stream.*;
 import org.junit.jupiter.params.*;
 import org.junit.jupiter.params.provider.*;
-
-import java.util.stream.*;
 
 import static com.github.moaxcp.graphwm.Edge.*;
 import static com.github.moaxcp.graphwm.Point.*;
@@ -15,6 +14,7 @@ public class WindowTest {
   private static final int INITIAL_Y = 200;
   private static final int INITIAL_WIDTH = 100;
   private static final int INITIAL_HEIGHT = 200;
+
   @MethodSource
   static Stream<Window<?>> windows() {
     return Stream.of(
@@ -31,7 +31,8 @@ public class WindowTest {
     assertThat(window.getNorthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y));
     assertThat(window.getNorthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1, INITIAL_Y));
     assertThat(window.getSouthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y + INITIAL_HEIGHT - 1));
-    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1, INITIAL_Y + INITIAL_HEIGHT - 1));
+    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1,
+        INITIAL_Y + INITIAL_HEIGHT - 1));
   }
 
   @ParameterizedTest
@@ -55,7 +56,8 @@ public class WindowTest {
     assertThat(window.getNorthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y));
     assertThat(window.getNorthEastCorner()).isEqualTo(point(INITIAL_X + 200 - 1, INITIAL_Y));
     assertThat(window.getSouthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y + INITIAL_HEIGHT - 1));
-    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + 200 - 1, INITIAL_Y + INITIAL_HEIGHT - 1));
+    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + 200 - 1,
+        INITIAL_Y + INITIAL_HEIGHT - 1));
   }
 
   @ParameterizedTest
@@ -79,7 +81,8 @@ public class WindowTest {
     assertThat(window.getNorthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y + 10));
     assertThat(window.getNorthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1, INITIAL_Y + 10));
     assertThat(window.getSouthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y + 10 + INITIAL_HEIGHT - 10 - 1));
-    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1, INITIAL_Y + 10 + INITIAL_HEIGHT - 10 - 1));
+    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1,
+        INITIAL_Y + 10 + INITIAL_HEIGHT - 10 - 1));
   }
 
   @ParameterizedTest
@@ -91,7 +94,8 @@ public class WindowTest {
     assertThat(window.getNorthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y - 10));
     assertThat(window.getNorthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1, INITIAL_Y - 10));
     assertThat(window.getSouthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y + 10 + INITIAL_HEIGHT - 10 - 1));
-    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1, INITIAL_Y + 10 + INITIAL_HEIGHT - 10 - 1));
+    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1,
+        INITIAL_Y + 10 + INITIAL_HEIGHT - 10 - 1));
   }
 
   @ParameterizedTest
@@ -103,7 +107,8 @@ public class WindowTest {
     assertThat(window.getNorthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y));
     assertThat(window.getNorthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1, INITIAL_Y));
     assertThat(window.getSouthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y + INITIAL_HEIGHT + 10 - 1));
-    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1, INITIAL_Y + INITIAL_HEIGHT + 10 - 1));
+    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1,
+        INITIAL_Y + INITIAL_HEIGHT + 10 - 1));
   }
 
   @ParameterizedTest
@@ -115,7 +120,8 @@ public class WindowTest {
     assertThat(window.getNorthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y));
     assertThat(window.getNorthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1, INITIAL_Y));
     assertThat(window.getSouthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y + INITIAL_HEIGHT - 10 - 1));
-    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1, INITIAL_Y + INITIAL_HEIGHT - 10 - 1));
+    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH - 1,
+        INITIAL_Y + INITIAL_HEIGHT - 10 - 1));
   }
 
   @ParameterizedTest
@@ -127,7 +133,8 @@ public class WindowTest {
     assertThat(window.getNorthWestCorner()).isEqualTo(point(INITIAL_X + 10, INITIAL_Y));
     assertThat(window.getNorthEastCorner()).isEqualTo(point(INITIAL_X + 10 + INITIAL_WIDTH - 10 - 1, INITIAL_Y));
     assertThat(window.getSouthWestCorner()).isEqualTo(point(INITIAL_X + 10, INITIAL_Y + INITIAL_HEIGHT - 1));
-    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + 10 + INITIAL_WIDTH - 10 - 1, INITIAL_Y + INITIAL_HEIGHT - 1));
+    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + 10 + INITIAL_WIDTH - 10 - 1,
+        INITIAL_Y + INITIAL_HEIGHT - 1));
   }
 
   @ParameterizedTest
@@ -139,7 +146,8 @@ public class WindowTest {
     assertThat(window.getNorthWestCorner()).isEqualTo(point(INITIAL_X - 10, INITIAL_Y));
     assertThat(window.getNorthEastCorner()).isEqualTo(point(INITIAL_X - 10 + INITIAL_WIDTH + 10 - 1, INITIAL_Y));
     assertThat(window.getSouthWestCorner()).isEqualTo(point(INITIAL_X - 10, INITIAL_Y + INITIAL_HEIGHT - 1));
-    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X - 10 + INITIAL_WIDTH + 10 - 1, INITIAL_Y + INITIAL_HEIGHT - 1));
+    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X - 10 + INITIAL_WIDTH + 10 - 1,
+        INITIAL_Y + INITIAL_HEIGHT - 1));
   }
 
   @ParameterizedTest
@@ -151,6 +159,7 @@ public class WindowTest {
     assertThat(window.getNorthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y));
     assertThat(window.getNorthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH + 10 - 1, INITIAL_Y));
     assertThat(window.getSouthWestCorner()).isEqualTo(point(INITIAL_X, INITIAL_Y + INITIAL_HEIGHT - 1));
-    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH + 10 - 1, INITIAL_Y + INITIAL_HEIGHT - 1));
+    assertThat(window.getSouthEastCorner()).isEqualTo(point(INITIAL_X + INITIAL_WIDTH + 10 - 1,
+        INITIAL_Y + INITIAL_HEIGHT - 1));
   }
 }

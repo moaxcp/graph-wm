@@ -32,13 +32,14 @@ public class Workspace {
 
   /**
    * Splits a tile vertically keeping the original tile on the west side.
-   * @param tileId
+   * @param tileId id of tile to split
    * @return
    */
   Workspace splitTileWest(int tileId) {
     var nextId = getNextId();
 
-    var tile = tiles.get(tileId).getOrElseThrow(() -> new IllegalArgumentException("tileId \"{}\" not found.".formatted(tileId)));
+    var tile = tiles.get(tileId).getOrElseThrow(
+        () -> new IllegalArgumentException("tileId \"{}\" not found.".formatted(tileId)));
 
     var edgePoint = tile.getNorthWestCorner().withXRelative(tile.getWidth() / 2 - EDGE_WIDTH / 2);
     var edge = edge(nextId++, edgePoint, EDGE_WIDTH, tile.getHeight());
@@ -48,7 +49,8 @@ public class Workspace {
     var nextTiles = tiles.put(west.getId(), west);
 
     var northWest = edge.getNorthEastCorner().withXRelative(1);
-    var east = tile(nextId++, northWest, tile.getNorthEastCorner().getX() - edge.getNorthEastCorner().getX(), height);
+    var east = tile(nextId++, northWest,
+        tile.getNorthEastCorner().getX() - edge.getNorthEastCorner().getX(), height);
     nextTiles = nextTiles.put(east.getId(), east);
 
     var nextGraph = graph.edge(west.getId(), east.getId(), edge.getId());
@@ -64,10 +66,16 @@ public class Workspace {
         .getOrElse(0);
   }
 
+  /**
+   * Splits tile horizontally adding a new tile south while the original tile is north.
+   * @param tileId of tile to split
+   * @return resulting workspace
+   */
   public Workspace splitTileNorth(int tileId) {
     var nextId = getNextId();
 
-    var tile = tiles.get(tileId).getOrElseThrow(() -> new IllegalArgumentException("tileId \"{}\" not found.".formatted(tileId)));
+    var tile = tiles.get(tileId).getOrElseThrow(
+        () -> new IllegalArgumentException("tileId \"{}\" not found.".formatted(tileId)));
 
     var edgePoint = tile.getNorthWestCorner().withYRelative(tile.getHeight() / 2 - EDGE_WIDTH / 2);
     var edge = edge(nextId++, edgePoint, tile.getWidth(), EDGE_WIDTH);
@@ -77,7 +85,8 @@ public class Workspace {
     var nextTiles = tiles.put(north.getId(), north);
 
     var northWest = edge.getSouthWestCorner().withYRelative(1);
-    var south = tile(nextId++, northWest, tile.getWidth(), tile.getSouthWestCorner().getY() - edge.getSouthWestCorner().getY());
+    var south = tile(nextId++, northWest, tile.getWidth(),
+        tile.getSouthWestCorner().getY() - edge.getSouthWestCorner().getY());
     nextTiles = nextTiles.put(south.getId(), south);
 
     var nextGraph = graph.edge(north.getId(), south.getId(), edge.getId());

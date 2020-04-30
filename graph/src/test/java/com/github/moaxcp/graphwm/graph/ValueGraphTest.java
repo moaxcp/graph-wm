@@ -55,7 +55,7 @@ public class ValueGraphTest {
 
   @Test
   void edge() {
-    var graph = new ValueGraph<>()
+    var graph = new ValueGraph<Integer, Integer>()
         .edge(1, 2, 3);
     assertThat(graph.getVertices()).containsExactly(1, 2);
     assertThat(graph.getEdges()).containsExactly(Tuple.of(new Edge<>(1, 2), 3));

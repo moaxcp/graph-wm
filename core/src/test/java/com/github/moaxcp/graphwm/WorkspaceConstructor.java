@@ -28,23 +28,4 @@ public class WorkspaceConstructor {
       assertThat(w.getTiles()).containsExactly(Tuple.of(0, tile(0, point(0, 0), 220, 230)));
     });
   }
-
-//  @Test
-//  void allArgsConstructor_null() {
-//    var exception = assertThrows(NullPointerException.class, () -> new Workspace(null, 0, 0, new ValueGraph<>(), HashMap.empty(), HashMap.empty()));
-//    assertThat(exception).hasMessage("id is marked non-null but is null");
-//  }
-//
-//  @Test
-//  void allArgsConstructor() {
-//    var workspace = new Workspace("id", 100, 120, new ValueGraph<>(), HashMap.empty(), HashMap.empty());
-//    assertThat(workspace).satisfies(w -> {
-//      assertThat(w.getName()).isEqualTo("id");
-//      assertThat(w.getWidth()).isEqualTo(100);
-//      assertThat(w.getHeight()).isEqualTo(120);
-//      assertThat(w.getEdges()).isEmpty();
-//      assertThat(w.getTiles()).isEmpty();
-//      assertThat(w.getGraph().isEmpty()).isTrue();
-//    });
-//  }
 }

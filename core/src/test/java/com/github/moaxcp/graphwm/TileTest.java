@@ -2,14 +2,15 @@ package com.github.moaxcp.graphwm;
 
 import org.junit.jupiter.api.*;
 
-import static com.github.moaxcp.graphwm.Tile.*;
 import static com.github.moaxcp.graphwm.Point.*;
+import static com.github.moaxcp.graphwm.Tile.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TileTest {
 
   private Point point = point(100, 100);
+
   @Test
   void tile_nullPoint() {
     var exception = assertThrows(NullPointerException.class, () -> tile(1, null, 0, 0));

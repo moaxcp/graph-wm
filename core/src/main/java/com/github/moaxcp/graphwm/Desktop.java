@@ -3,6 +3,9 @@ package com.github.moaxcp.graphwm;
 import io.vavr.collection.*;
 import lombok.*;
 
+/**
+ * Represents a desktop. Immutable.
+ */
 @With(AccessLevel.PRIVATE)
 @Value
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -32,6 +35,12 @@ public class Desktop {
     return withWorkspaces(workspaces.remove(id));
   }
 
+  /**
+   * Assigns a workspace to a screen using the provided ids.
+   * @param workspaceId workspace to assign
+   * @param screenId screen to assign workspace
+   * @return the resulting Desktop
+   */
   public Desktop assignWorkspace(@NonNull String workspaceId, @NonNull String screenId) {
     if (!workspaces.containsKey(workspaceId)) {
       throw new IllegalArgumentException("Workspace \"%s\" not found.".formatted(workspaceId));

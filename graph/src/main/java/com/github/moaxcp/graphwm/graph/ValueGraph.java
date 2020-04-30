@@ -1,7 +1,9 @@
 package com.github.moaxcp.graphwm.graph;
 
+import io.vavr.*;
 import io.vavr.collection.*;
 import lombok.*;
+import lombok.Value;
 
 /**
  * An immutable graph where each edge has a non-unique value.
@@ -20,12 +22,17 @@ public class ValueGraph<K, V> {
 
     @Override
     public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
 
       Edge<?> edge = (Edge<?>) o;
 
-      return (source.equals(edge.source) || source.equals(edge.target)) && (target.equals(edge.source) || target.equals(edge.target));
+      return (source.equals(edge.source) || source.equals(edge.target))
+          && (target.equals(edge.source) || target.equals(edge.target));
     }
 
     @Override
@@ -57,10 +64,15 @@ public class ValueGraph<K, V> {
     return vertices.isEmpty();
   }
 
+  /**
+   * Returns all {@link Edge edges} with the given value.
+   * @param value on each edge
+   * @return set of edges with given value
+   */
   public Set<Edge<K>> edgesWithValue(@NonNull K value) {
     return edges.toStream()
         .filter(t -> t._2().equals(value))
-        .map(t -> t._1())
+        .map(Tuple2::_1)
         .foldLeft(HashSet.of(), HashSet::add);
   }
 

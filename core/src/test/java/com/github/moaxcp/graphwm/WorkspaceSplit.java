@@ -14,7 +14,7 @@ public class WorkspaceSplit {
   @Test
   void splitTileWest() {
     var workspace = new Workspace("workspace", 200, 200)
-      .splitTileWest(0);
+        .splitTileWest(0);
     assertThat(workspace.getEdges()).containsExactly(Tuple.of(1, edge(1, point(100, 0), 1, 200)));
     assertThat(workspace.getTiles()).containsExactly(
         Tuple.of(0, tile(0, point(0, 0), 100, 200)),
