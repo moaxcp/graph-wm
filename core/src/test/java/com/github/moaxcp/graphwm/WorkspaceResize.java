@@ -10,6 +10,7 @@ import static org.assertj.vavr.api.VavrAssertions.*;
 
 public class WorkspaceResize {
   @Test
+  @Disabled
   void resizeNorth() {
     var workspace = new Workspace("workspace", 400, 500)
         .splitTileNorth(0);

@@ -84,9 +84,9 @@ public class ValueGraphTest {
         .edge(5, 6, 'A')
         .edge(10, 11, 'B')
         .edge(20, 21, 'B');
-    assertThat(graph.edgesWithValue('A')).isEqualTo(HashSet.of(new Edge(1, 2),
-        new Edge(3, 4),
-        new Edge(5, 6)));
+    assertThat(graph.edgesWithValue('A')).isEqualTo(HashSet.of(new Edge<>(1, 2),
+        new Edge<>(3, 4),
+        new Edge<>(5, 6)));
   }
 
   @Test
