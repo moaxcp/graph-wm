@@ -24,7 +24,7 @@ plugins {
 }
 
 group = 'com.github.moaxcp.graphwm'
-description = 'a tiling window manager which uses a graph to make tiling easy.'
+description = 'A tiling window manager which uses a graph to make tiling easy.'
 
 reckon {
     scopeFromProp()
@@ -40,6 +40,9 @@ dependencies {
     annotationProcessor "io.micronaut.configuration:micronaut-picocli"
     annotationProcessor "io.micronaut:micronaut-inject-java"
     annotationProcessor "io.micronaut:micronaut-validation"
+
+    implementation 'com.github.moaxcp:escher:0.4.0'
+
     implementation "io.micronaut:micronaut-runtime"
     implementation "info.picocli:picocli"
     implementation "io.micronaut.configuration:micronaut-picocli"

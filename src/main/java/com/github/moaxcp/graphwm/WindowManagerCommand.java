@@ -1,9 +1,13 @@
 package com.github.moaxcp.graphwm;
 
-import io.micronaut.configuration.picocli.*;
-import picocli.CommandLine.*;
+import gnu.x11.Display;
+import io.micronaut.configuration.picocli.PicocliRunner;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 
-@Command(name = "window-manager", description = "...",
+import static gnu.x11.DisplayName.parse;
+
+@Command(name = "graph-wm", description = "A tiling window manager which uses a graph to make tiling easy.",
     mixinStandardHelpOptions = true)
 public class WindowManagerCommand implements Runnable {
 
@@ -21,6 +25,10 @@ public class WindowManagerCommand implements Runnable {
     // business logic here
     if (verbose) {
       System.out.println("Hi!");
+    }
+
+    try(Display display = parse().connect()) {
+
     }
   }
 }
