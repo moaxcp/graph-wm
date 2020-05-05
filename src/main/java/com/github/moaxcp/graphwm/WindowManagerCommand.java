@@ -1,18 +1,30 @@
 package com.github.moaxcp.graphwm;
 
-import gnu.x11.Display;
 import io.micronaut.configuration.picocli.PicocliRunner;
+import io.micronaut.logging.LogLevel;
+import io.micronaut.logging.LoggingSystem;
+import javax.inject.Inject;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-
-import static gnu.x11.DisplayName.parse;
 
 @Command(name = "graph-wm", description = "A tiling window manager which uses a graph to make tiling easy.",
     mixinStandardHelpOptions = true)
 public class WindowManagerCommand implements Runnable {
 
-  @Option(names = {"-v", "--verbose"}, description = "...")
-  boolean verbose;
+  @Option(names = {"--info"}, description = "ouput info logging")
+  boolean info;
+  @Option(names = {"--debug"}, description = "output debug logging")
+  boolean debug;
+  @Option(names = {"--trace"}, description = "output trace logging")
+  boolean trace;
+  @Option(names = {"-d", "--display"}, description = "display to use")
+  String displayArg;
+
+  @Inject
+  private WindowManager manager;
+
+  @Inject
+  private LoggingSystem loggingSystem;
 
   public static void main(String[] args) throws Exception {
     PicocliRunner.run(WindowManagerCommand.class, args);
@@ -22,13 +34,21 @@ public class WindowManagerCommand implements Runnable {
    * Runs application.
    */
   public void run() {
-    // business logic here
-    if (verbose) {
-      System.out.println("Hi!");
-    }
+    configureLogging();
+    manager.setupDisplay(displayArg);
+  }
 
-    try(Display display = parse().connect()) {
-
+  private void configureLogging() {
+    LogLevel level;
+    if(info) {
+      level = LogLevel.INFO;
+    } else if (debug) {
+      level = LogLevel.DEBUG;
+    } else if (trace) {
+      level = LogLevel.TRACE;
+    } else {
+      level = LogLevel.WARN;
     }
+    loggingSystem.setLogLevel("root", level);
   }
 }
