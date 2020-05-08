@@ -18,9 +18,10 @@ plugins {
     id 'org.ajoberstar.git-publish' version '3.0.0-rc.1'
 
     //for top level project
-    id "net.ltgt.apt-eclipse" version "0.21"
-    id "com.github.johnrengelman.shadow" version "5.2.0"
-    id "application"
+    id 'net.ltgt.apt-eclipse' version '0.21'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'application'
+    id 'com.github.moaxcp.Xephyr'
 }
 
 group = 'com.github.moaxcp.graphwm'
@@ -41,7 +42,7 @@ dependencies {
     annotationProcessor "io.micronaut:micronaut-inject-java"
     annotationProcessor "io.micronaut:micronaut-validation"
 
-    implementation 'com.github.moaxcp:escher:0.4.0'
+    implementation 'com.github.moaxcp:escher:0.5.0-SNAPSHOT'
 
     implementation "io.micronaut:micronaut-runtime"
     implementation "info.picocli:picocli"
@@ -86,6 +87,7 @@ allprojects {
     apply plugin: 'checkstyle'
 
     repositories {
+        mavenLocal()
         mavenCentral()
         jcenter()
     }

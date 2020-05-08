@@ -4,6 +4,7 @@ import io.micronaut.configuration.picocli.PicocliRunner;
 import io.micronaut.logging.LogLevel;
 import io.micronaut.logging.LoggingSystem;
 import javax.inject.Inject;
+import org.slf4j.Logger;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
@@ -49,6 +50,6 @@ public class WindowManagerCommand implements Runnable {
     } else {
       level = LogLevel.WARN;
     }
-    loggingSystem.setLogLevel("root", level);
+    loggingSystem.setLogLevel(Logger.ROOT_LOGGER_NAME, level);
   }
 }

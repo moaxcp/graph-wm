@@ -15,7 +15,7 @@ public class WindowManager {
   private Display display;
 
   @PreDestroy
-  public void destroy() {
+  public void close() {
     display.close();
   }
 

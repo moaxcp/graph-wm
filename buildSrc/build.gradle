@@ -1,0 +1,27 @@
+plugins {
+    id 'java-gradle-plugin'
+    id "io.freefair.lombok" version "5.0.1"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation testFixtures('com.github.moaxcp:escher:0.5.0-SNAPSHOT')
+}
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'com.github.moaxcp.Xephyr'
+            implementationClass = 'com.github.moaxcp.XephyrPlugin'
+        }
+    }
+}
+
+lombok {
+    version = '1.18.12'
+}
